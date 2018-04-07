@@ -22,16 +22,17 @@ export class AuthService {
     this.currentKey$ = new BehaviorSubject(xkeys.getPublicKey());
   }
 
-  async signIn(secret, privateKey) {
-    const pubKey = await this.xkeys.createPublicKey(secret, privateKey);
-    this.currentKey$.next(pubKey);
+  async signIn(secret, seed) {
+    await this.xkeys.createKeyPair(secret, seed);
+    this.currentKey$.next(this.xkeys.getPublicKey());
     this.router.navigateByUrl('/');
   }
 
   async signUp(secret) {
-    const pubKey = await this.xkeys.createKeyPair(secret);
-    this.currentKey$.next(pubKey);
+    const seed = await this.xkeys.createKeyPair(secret);
+    this.currentKey$.next(this.xkeys.getPublicKey());
     this.router.navigateByUrl('/');
+    return seed;
   }
 
   logout() {

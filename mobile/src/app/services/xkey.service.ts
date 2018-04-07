@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import * as jwt from 'webcrypto-jwt';
+import {core} from '../core';
 
 @Injectable()
 export class XkeyService {
@@ -35,17 +36,21 @@ export class XkeyService {
     });
   }
 
-  /**generate public key by private and save signed by secret */
-  createPublicKey(secret: string, privateKey: string) {
-    const publicKey = this.generatePublicKey(privateKey);
-    return this.saveKeys(secret, privateKey, publicKey);
-  }
+  /**generate private and return seed */
+  createKeyPair(secret: string, seedIn?: string) {
+    return new Promise<string>((res, rej) => {
+      try {
+        const seed = seedIn ? seedIn : core.genSeed();
+        const pair = core.genKeyPair(seed);
+        this.saveKeys(secret, pair.private, pair.public)
+          .then(value => {
+            res(seed);
+          });
 
-  /**generate private and return public key */
-  createKeyPair(secret: string) {
-    const privateKey = this.generatePrivateKey(),
-      publicKey = this.generatePublicKey(privateKey);
-    return this.saveKeys(secret, privateKey, publicKey);
+      } catch (e) {
+        rej(e.message);
+      }
+    });
   }
 
   removeKeys() {
@@ -66,20 +71,6 @@ export class XkeyService {
         res(publicKey);
       });
     });
-  }
-
-  generatePublicKey(privateKey) {
-    return 'X';
-  }
-
-  generatePrivateKey() {
-    var key = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  
-    for (var i = 0; i < 256; i++)
-      key += possible.charAt(Math.floor(Math.random() * possible.length));
-  
-    return key;
   }
 
 }

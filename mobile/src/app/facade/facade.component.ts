@@ -42,6 +42,7 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       if (!this.mobileQuery.matches)
         this.sideNav.open();
+      
     });
   }
 
