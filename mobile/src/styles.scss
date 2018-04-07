@@ -7,9 +7,9 @@ html, body, #blitz-app {
 @import '~@angular/material/theming';
 @include mat-core();
 
-$hack-primary: mat-palette($mat-purple);
-$hack-accent:  mat-palette($mat-pink);
-$hack-warn:    mat-palette($mat-red);
+$hack-primary: mat-palette($mat-teal);
+$hack-accent:  mat-palette($mat-purple);
+$hack-warn:    mat-palette($mat-orange);
 
 $candy-app-theme: mat-dark-theme($hack-primary, $hack-accent, $hack-warn);
 

@@ -1,3 +1,34 @@
-<p>
-  login works!
-</p>
+<div class="login-container">
+
+    <mat-card layout-align="center center">
+      <mat-card-header>
+        <div mat-card-avatar
+             class="login-header-image"></div>
+        <mat-card-title>Hack Core 🚀</mat-card-title>
+        <mat-card-subtitle>Sign</mat-card-subtitle>
+      </mat-card-header>
+      <form [formGroup]="loginForm"
+            (keyup.enter)="onLogin()"
+            novalidate>
+        <mat-form-field>
+          <input matInput
+                 required
+                 formControlName="key"
+                 [placeholder]="ph"
+                 type="text">
+        </mat-form-field>
+        <mat-slide-toggle formControlName="signUp">{{label}}</mat-slide-toggle>
+      </form>
+      <mat-card-content>
+  
+      </mat-card-content>
+  
+      <button mat-raised-button
+              (click)="onLogin()"
+              color="primary">
+        <!-- <mat-icon>account_circle</mat-icon> -->
+        GO!
+      </button>
+    </mat-card>
+  
+  </div>

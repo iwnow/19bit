@@ -1,7 +1,0 @@
-{
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outFile": "./build/index.js",
-    "module": "esnext"
-  }
-}

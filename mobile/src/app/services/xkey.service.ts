@@ -4,22 +4,28 @@ import * as jwt from 'webcrypto-jwt';
 
 @Injectable()
 export class XkeyService {
-  protected XKEY = '__XKEY__';
+  protected XKEY_PRIVATE = '__XKEY__PRIVATE';
+  protected XKEY_PUBLIC = '__XKEY__PUBLIC';
+  protected ALGO = 'HS256';
 
   constructor(
     public storage: StorageService
   ) { }
 
   isCreated() {
-    return !!this.storage.getKey(this.XKEY);
+    return !!this.storage.getKey(this.XKEY_PRIVATE);
   }
 
-  getKeyBySecret(secret: string): Promise<string> {
+  getPublicKey(): string {
+    return this.storage.getKey(this.XKEY_PUBLIC);
+  }
+
+  getPrivateKeyBySecret(secret: string): Promise<string> {
     return new Promise(res => {
-      const value = this.storage.getKey(this.XKEY);
+      const value = this.storage.getKey(this.XKEY_PRIVATE);
       if (!value)
         return res(null);
-      jwt.verifyJWT(value, secret, 'HS256', (err, isValid) => {
+      jwt.verifyJWT(value, secret, this.ALGO, (err, isValid) => {
         if (err || !isValid)
           return res(null);
         
@@ -29,18 +35,26 @@ export class XkeyService {
     });
   }
 
-  generateAndSignKey(secret: string) {
-    return new Promise<any>((res, rej) => {
+  /**generate private and return public key */
+  generateAndSignPrivateKey(secret: string) {
+    return new Promise<string>((res, rej) => {
+      const privateKey = this.generateKey();
       jwt.signJWT({
-        key: this.generateKey()
-      }, secret, 'HS256', (err, token) => {
+        key: privateKey
+      }, secret, this.ALGO, (err, token) => {
         if (err)
           return rej(err);
-        this.storage.saveKey(this.XKEY, token);
-        res();
+        this.storage.saveKey(this.XKEY_PRIVATE, token);
+        const publicKey = this.generatePublicKey(privateKey);
+        this.storage.saveKey(this.XKEY_PUBLIC, publicKey);
+        res(publicKey);
       });
     });
     
+  }
+
+  generatePublicKey(privateKey) {
+    return 'X';
   }
 
   generateKey() {

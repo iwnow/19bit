@@ -1,0 +1,49 @@
+:host {
+	display: block;
+	height: 100%;
+	background-color: #222;
+	position: relative;
+}
+
+.login-container {
+	position: absolute;
+	left: 0;
+	right: 0;    
+	top: 12%;
+	
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover, 
+	input:-webkit-autofill:focus
+	input:-webkit-autofill, 
+	textarea:-webkit-autofill,
+	textarea:-webkit-autofill:hover
+	textarea:-webkit-autofill:focus,
+	select:-webkit-autofill,
+	select:-webkit-autofill:hover,
+	select:-webkit-autofill:focus {
+		// border: 1px solid green;
+		-webkit-text-fill-color: rgb(54, 54, 54);
+		-webkit-box-shadow: 0 0 0px 1000px #fff inset;
+		transition: background-color 5000s ease-in-out 0s;
+	}
+}
+
+mat-card {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.login-header-image {
+	background: url(/assets/login.jpg) no-repeat;
+	background-size: auto 40px;
+	background-position-x: 0px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+button {
+	width: 100%;
+}

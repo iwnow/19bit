@@ -54,6 +54,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { XkeyService } from './services/xkey.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { XkeyService } from './services/xkey.service';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     LayoutModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
