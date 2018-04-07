@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterViewInit, ViewChi
 import {MediaMatcher} from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
 
+import {core} from '../core';
+
 @Component({
   selector: 'app-facade',
   templateUrl: './facade.component.html',
@@ -24,7 +26,7 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => this.cdr.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    
+    console.log(core.jsonToByte(JSON.stringify({o: 6})));
   }
 
   ngOnDestroy(): void {

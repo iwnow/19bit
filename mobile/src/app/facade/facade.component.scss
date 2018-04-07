@@ -30,8 +30,15 @@
     flex: 1 0 auto;
   }
 
-  .example-header-image {
+  .profile-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
+  }
+
+  .profile-card-toolbar {
+      background-color: transparent;
+      border: none !important;
+      box-shadow: none !important;
+      cursor: pointer;
   }
   
