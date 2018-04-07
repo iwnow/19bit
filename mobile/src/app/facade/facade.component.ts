@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
-
-import {core} from '../core';
+import { XkeyService } from '../services/xkey.service';
 
 @Component({
   selector: 'app-facade',
@@ -19,14 +18,15 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
   
   constructor(
     public cdr: ChangeDetectorRef,
-    public media: MediaMatcher
+    public media: MediaMatcher,
+    public xkey: XkeyService
   ) { }
 
   ngOnInit() {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => this.cdr.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    console.log(core.jsonToByte(JSON.stringify({o: 6})));
+    window['__facade'] = this;
   }
 
   ngOnDestroy(): void {

@@ -51,6 +51,9 @@ import { WalletComponent } from './wallet/wallet.component';
 import { BlocksComponent } from './blocks/blocks.component';
 import { HistoryComponent } from './history/history.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthService } from './services/auth.service';
+import { StorageService } from './services/storage.service';
+import { XkeyService } from './services/xkey.service';
 
 
 @NgModule({
@@ -103,7 +106,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatTooltipModule,
     MatFormFieldModule
   ],
-  providers: [LoginGuard],
+  providers: [LoginGuard, AuthService, StorageService, XkeyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
