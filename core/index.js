@@ -1,7 +1,14 @@
+const getWalletInfo = require('./getWalletInfo');
+const getTransactionHistoryByBlockId = require('./getTransactionHistoryByBlockId');
+const getNTransactions = require('./getNTransactions');
 const cbor = require('cbor')
 const curve25519 = require('./curve25519/axlsign.js')
 const rand = require('csprng');
 const Base58 = require('base-58')
+
+const jsonToByte = function(json) {
+  return cbor.encode(json);
+}
 
 const genSeed = function () {
 	let chunks = []
@@ -34,6 +41,10 @@ const verifySignature = function (publicBase58, message, signatureBase58) {
 
 module.exports = {
 	genKeyPair,
-	computeSignature /*,
-	verifySignature*/
+	computeSignature, 
+	//verifySignature,
+	jsonToByte,
+	getWalletInfo,
+	getTransactionHistoryByBlockId,
+	getNTransactions
 }
