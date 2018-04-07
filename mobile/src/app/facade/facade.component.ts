@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterViewInit, ViewChi
 import {MediaMatcher} from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
 import { XkeyService } from '../services/xkey.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-facade',
@@ -19,7 +20,8 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     public cdr: ChangeDetectorRef,
     public media: MediaMatcher,
-    public xkey: XkeyService
+    public xkey: XkeyService,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {

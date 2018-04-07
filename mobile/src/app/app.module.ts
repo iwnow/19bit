@@ -55,6 +55,7 @@ import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { XkeyService } from './services/xkey.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FacadeGuard } from './guards/facade.guard';
 
 
 @NgModule({
@@ -108,7 +109,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTooltipModule,
     MatFormFieldModule
   ],
-  providers: [LoginGuard, AuthService, StorageService, XkeyService],
+  providers: [LoginGuard, AuthService, StorageService, XkeyService, FacadeGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

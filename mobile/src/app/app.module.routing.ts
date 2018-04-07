@@ -6,11 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { BlocksComponent } from './blocks/blocks.component';
 import { HistoryComponent } from './history/history.component';
+import { FacadeGuard } from './guards/facade.guard';
 
 const routes: Route[] = [{
         path: '',
         component: FacadeComponent,
-        canActivate: [LoginGuard],
+        canActivate: [FacadeGuard],
         children: [
             {
                 path: 'wallet',

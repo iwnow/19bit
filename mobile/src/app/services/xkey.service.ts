@@ -35,29 +35,44 @@ export class XkeyService {
     });
   }
 
+  /**generate public key by private and save signed by secret */
+  createPublicKey(secret: string, privateKey: string) {
+    const publicKey = this.generatePublicKey(privateKey);
+    return this.saveKeys(secret, privateKey, publicKey);
+  }
+
   /**generate private and return public key */
-  generateAndSignPrivateKey(secret: string) {
+  createKeyPair(secret: string) {
+    const privateKey = this.generatePrivateKey(),
+      publicKey = this.generatePublicKey(privateKey);
+    return this.saveKeys(secret, privateKey, publicKey);
+  }
+
+  removeKeys() {
+    this.storage.removeKey(this.XKEY_PRIVATE);
+    this.storage.removeKey(this.XKEY_PUBLIC);
+  }
+
+  protected saveKeys(secret: string, privateKey: string, publicKey: string) {
     return new Promise<string>((res, rej) => {
-      const privateKey = this.generateKey();
       jwt.signJWT({
         key: privateKey
       }, secret, this.ALGO, (err, token) => {
         if (err)
           return rej(err);
+
         this.storage.saveKey(this.XKEY_PRIVATE, token);
-        const publicKey = this.generatePublicKey(privateKey);
         this.storage.saveKey(this.XKEY_PUBLIC, publicKey);
         res(publicKey);
       });
     });
-    
   }
 
   generatePublicKey(privateKey) {
     return 'X';
   }
 
-  generateKey() {
+  generatePrivateKey() {
     var key = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   
