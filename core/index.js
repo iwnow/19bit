@@ -1,5 +1,7 @@
-import jsonToByte from './jsonToByte';
+const cbor = require('cbor');
 
-export {
-  jsonToByte
+const jsonToByte = function(json) {
+  return cbor.encode(json);
 }
+
+export {jsonToByte};
