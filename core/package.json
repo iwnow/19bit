@@ -1,0 +1,17 @@
+{
+  "name": "unblock-core",
+  "version": "0.0.1",
+  "description": "UnBlock Core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:babel": "babel index.js --watch --out-file build/index.js",
+
+  },
+  "author": "Javed",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "typescript": "^2.8.1"
+  }
+}
