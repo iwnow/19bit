@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       .pipe(startWith(false))
       .subscribe(v => {
         this.ph = v ? 'Set password to protect your key 🔒' : 'Set password and we generate keys for you 🔒';
-        this.label = v ? 'SignUp' : 'SignIn';
+        this.label = v ? 'SignIn' : 'SignUp';
       })
     this.auth.isAuth.subscribe(auth => {
       auth && this.router.navigateByUrl('/');

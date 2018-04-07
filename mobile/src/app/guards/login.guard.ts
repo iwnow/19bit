@@ -15,12 +15,6 @@ export class LoginGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.auth.isAuth.pipe(
-      map(auth => !auth),
-      tap(auth => {
-        // if (auth)
-        //   this.router.navigateByUrl('/');
-      })
-    );
+    return true;
   }
 }

@@ -4,6 +4,8 @@ import { MatSidenav } from '@angular/material';
 import { XkeyService } from '../services/xkey.service';
 import { AuthService } from '../services/auth.service';
 
+import {core} from '../core';
+
 @Component({
   selector: 'app-facade',
   templateUrl: './facade.component.html',
@@ -29,6 +31,7 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
     this._mobileQueryListener = () => this.cdr.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     window['__facade'] = this;
+    window['__core'] = core;
   }
 
   ngOnDestroy(): void {

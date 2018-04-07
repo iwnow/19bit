@@ -15,14 +15,13 @@
                  required
                  formControlName="password"
                  [placeholder]="ph"
-                 placeholder="Set password to protect your key 🔒"
                  type="password">
         </mat-form-field>
         <mat-form-field *ngIf="signUp.value">
             <input matInput
                    required
                    formControlName="privateKey"
-                   placeholder="Set you private key 🔑"
+                   placeholder="Set your seed 🔑"
                    type="text">
           </mat-form-field>
         <mat-slide-toggle formControlName="signUp">{{label}}</mat-slide-toggle>
