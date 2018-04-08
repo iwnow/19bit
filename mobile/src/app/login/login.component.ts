@@ -1,10 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import * as ptjs from 'particles.js';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,9 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, AfterViewInit {
+  @ViewChild('seedTmpl')
+  seedTmpl: TemplateRef<any>;
+
   loginForm: FormGroup;
   ph: string;
   label: string;
@@ -25,7 +28,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -52,7 +56,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.error = null;
     try {
       if (!this.signUp.value && this.loginForm.controls.password.valid) {
-        await this.auth.signUp(this.loginForm.controls.password.value);
+        const seed = await this.auth.signUp(this.loginForm.controls.password.value);
+        this.dialog.open(this.seedTmpl, {
+          data: seed,
+        })
       } else if (this.signUp.value && this.loginForm.valid) {
         await this.auth.signIn(
           this.loginForm.controls.password.value,
