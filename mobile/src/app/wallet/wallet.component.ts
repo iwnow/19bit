@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild, TemplateRef } from '@angular/core';
 import { XkeyService } from '../services/xkey.service';
-import { WalletService } from './wallet.service';
+import { WalletService, TransferData } from './wallet.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-wallet',
@@ -11,6 +12,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   providers: [WalletService]
 })
 export class WalletComponent implements OnInit {
+  @ViewChild('errorTmpl')
+  seedTmpl: TemplateRef<any>;
+
   info = null;
   transferForm: FormGroup;
 
@@ -18,6 +22,8 @@ export class WalletComponent implements OnInit {
     public cdr: ChangeDetectorRef,
     public walletSrv: WalletService,
     private fb: FormBuilder,
+    public snackBar: MatSnackBar,
+    public xkeys: XkeyService
   ) { }
 
   async ngOnInit() {
@@ -26,6 +32,10 @@ export class WalletComponent implements OnInit {
       amount: [0, Validators.required],
       fee: [1, Validators.required],
     });
+    await this.refresh();
+  }
+
+  async refresh() {
     try {
       this.info = await this.walletSrv.getInfo();
       console.log(this.info);
@@ -35,8 +45,30 @@ export class WalletComponent implements OnInit {
     }
   }
 
-  send() {
+  async send() {
+    try {
+      const transferData: TransferData = {
+        accPubKey: 'Ac7jFxBokKyJtdnZFb41QoYEW3g99EN4s9TDHpwbjmHk',
+        fee: 1,
+        change: 1,
+        timestamp: Date.now(),
+        recipient: '42bkLVene8CusBXo2S28fvjUruLUNEeEwfLCeXu65dEXE1snKm',
+        amount: 3,
+        useBoxes: []
+      };
+      transferData.recipient = this.transferForm.get('address').value;
+      transferData.accPubKey = this.xkeys.getPublicKey();
+      transferData.amount = this.transferForm.get('amount').value;
+      transferData.fee = this.transferForm.get('fee').value;
 
+      const pk = await this.xkeys.getPrivateKeyBySecret('1901');
+      await this.walletSrv.transfer(transferData, pk);
+      await this.refresh();
+    } catch (e) {
+      this.snackBar.open(`Error: ${e || 'error :( '}`, 'OK', {
+        duration: 3000
+      });
+    }
   }
 
 }

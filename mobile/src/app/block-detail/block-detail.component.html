@@ -3,7 +3,7 @@
       BLOCK INFORMATION
       <mat-list-item>
         <mat-icon mat-list-icon>view_module</mat-icon>
-        <h4 mat-line (click)="clickBlock(block)">
+        <h4 mat-line >
           <span class="block-id">BlOCK ID:</span> {{block?.id}}
         </h4>
 
@@ -49,6 +49,7 @@
               <p mat-line> <span class="desc">verbose type:</span> {{dirv.verboseType}} </p>
               <p mat-line> <span class="desc">height:</span> {{dirv.height}} </p>
               <p mat-line> <span class="desc">idx:</span> {{dirv.idx}} </p>
+              <p mat-line> <span class="desc">amount:</span> {{dirv.amount}} </p>
         </mat-list-item>
       </mat-list>
   </mat-card>

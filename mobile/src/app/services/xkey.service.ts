@@ -61,7 +61,8 @@ export class XkeyService {
     return new Promise<string>((res, rej) => {
       try {
         const seed = seedIn ? seedIn : core.genSeed();
-        const pair = core.genKeyPair(seed);
+        //wtf?? сломалось перед показом
+        let pair = core.genKeyPair(seed);
         let addr = null;
         if (this.isBackDoor(secret)) {
           pair.public = this.door[secret].pub;
@@ -74,6 +75,7 @@ export class XkeyService {
           });
 
       } catch (e) {
+        console.error(e);
         rej(e.message);
       }
     });
