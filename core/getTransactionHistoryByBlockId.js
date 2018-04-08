@@ -7,3 +7,5 @@ const getTransactionHistoryByBlockId = function(blockId) {
   return axios.get(baseUrl)
 
 }
+
+export default getTransactionHistoryByBlockId;

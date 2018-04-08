@@ -1,3 +1,50 @@
 <mat-card>
-  Wallet info:
+    <mat-card-header>
+        <mat-card-title>Wallet Info &nbsp; 💳</mat-card-title>
+      </mat-card-header>
+  <br>
+  <br>
+  <p>
+      📙 &nbsp;Address: {{info?.address}} <br>
+  </p>
+  <p>
+      👛 &nbsp; Balance: {{info?.balance}} <br>
+  </p>
+  
+</mat-card>
+<br>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Transfer Money 🚀</mat-card-title>
+      </mat-card-header>
+    <form [formGroup]="transferForm"
+      class="transfer-form"
+        novalidate>
+        <mat-form-field>
+          <input matInput
+                required
+                formControlName="address"
+                placeholder="address"
+                type="text">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput
+                  required
+                  formControlName="amount"
+                  placeholder="amount"
+                  type="number">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput
+                    required
+                    formControlName="fee"
+                    placeholder="fee"
+                    type="number">
+            </mat-form-field>
+          <button mat-raised-button
+              (click)="send()"
+              color="primary">
+        Send tokens 💰
+      </button>
+    </form>
 </mat-card>

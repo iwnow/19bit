@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
     } catch (e) {
       this.error = e;
-      this.snackBar.open(`Error: ${e}`, 'OK', {
+      this.snackBar.open(`Error: ${e || 'seed is not valid '}`, 'OK', {
         duration: 3000
       });
     }

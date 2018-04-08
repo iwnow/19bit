@@ -57,6 +57,9 @@ import { XkeyService } from './services/xkey.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FacadeGuard } from './guards/facade.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BlocksService } from './services/blocks.service';
+import { BlockDetailComponent } from './block-detail/block-detail.component';
 
 @NgModule({
   declarations: [
@@ -67,10 +70,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BlocksComponent,
     HistoryComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    BlockDetailComponent
   ],
   imports: [
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     ServiceWorkerModule.register('/unblock-t19/ngsw-worker.js', { enabled: environment.production }),
     LayoutModule,
@@ -110,7 +115,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatTooltipModule,
     MatFormFieldModule
   ],
-  providers: [LoginGuard, AuthService, StorageService, XkeyService, FacadeGuard],
+  providers: [LoginGuard, AuthService, StorageService, XkeyService, FacadeGuard, BlocksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

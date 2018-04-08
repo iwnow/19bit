@@ -1,4 +1,24 @@
 <mat-card>
-    Blocks info:
-  </mat-card>
+    Last 10 blocks
+    <button mat-raised-button color="primary" (click)="refresh(10)">
+        <mat-icon>refresh</mat-icon> Refresh
+      </button>
+      {{error}}
+</mat-card>
+
+<mat-card *ngFor="let block of dataBlocks" class="card-block">
+  <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>view_module</mat-icon>
+        <h4 mat-line (click)="clickBlock(block)">
+          <span class="block-id">BlOCK ID:</span> {{block.id}}
+        </h4>
+
+
+        <p mat-line> <span class="desc">difficulty:</span> {{block.difficulty}} </p>
+        <p mat-line> <span class="desc">timestamp:</span> {{getDate(block.timestamp)}} </p>
+        <p mat-line> <span class="desc">height:</span> {{block.height}} </p>
+      </mat-list-item>
+    </mat-list>
+</mat-card>
   
