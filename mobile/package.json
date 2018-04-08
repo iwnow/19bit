@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build --prod --base-href /unblock-t19 --deploy-url /unblock-t19",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -56,7 +56,7 @@ import { StorageService } from './services/storage.service';
 import { XkeyService } from './services/xkey.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FacadeGuard } from './guards/facade.guard';
-
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -66,12 +66,13 @@ import { FacadeGuard } from './guards/facade.guard';
     WalletComponent,
     BlocksComponent,
     HistoryComponent,
-    ProfileComponent
+    ProfileComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('/unblock-t19/ngsw-worker.js', { enabled: environment.production }),
     LayoutModule,
     FlexLayoutModule,
     ReactiveFormsModule,

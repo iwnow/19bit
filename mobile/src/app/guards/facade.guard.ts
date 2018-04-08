@@ -19,8 +19,8 @@ export class FacadeGuard implements CanActivate {
         tap(auth => {
           if (!auth)
             this.router.navigateByUrl('/login');
-          else if (state.url === '/')
-            this.router.navigateByUrl('/wallet');
+          // else if (state.url === '/')
+          //   this.router.navigateByUrl('/wallet');
         })
       );
   }

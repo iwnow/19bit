@@ -5,6 +5,7 @@ import { XkeyService } from '../services/xkey.service';
 import { AuthService } from '../services/auth.service';
 
 import {core} from '../core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-facade',
