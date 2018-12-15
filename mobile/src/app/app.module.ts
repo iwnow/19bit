@@ -60,6 +60,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { BlocksService } from './services/blocks.service';
 import { BlockDetailComponent } from './block-detail/block-detail.component';
 import { ApiService } from './services/api.service';
+import { MyNewComponentComponent } from './my-new-component/my-new-component.component';
+import { UserComponent } from './user/user.component';
+import { ClientComponent } from './client/client.component';
+import {NgModule} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {MatInputModule, MatTableModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -71,7 +77,10 @@ import { ApiService } from './services/api.service';
     HistoryComponent,
     ProfileComponent,
     DashboardComponent,
-    BlockDetailComponent
+    BlockDetailComponent,
+    MyNewComponentComponent,
+    UserComponent,
+    ClientComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -120,3 +129,8 @@ import { ApiService } from './services/api.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+@NgModule({
+  imports: [CommonModule, MatToolbarModule, MatInputModule, MatTableModule],
+  exports: [CommonModule, MatToolbarModule, MatInputModule, MatTableModule],
+})
+export class MaterialModule { }

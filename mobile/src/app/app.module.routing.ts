@@ -6,6 +6,8 @@ import { LoginComponent } from './login/login.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { BlocksComponent } from './blocks/blocks.component';
 import { HistoryComponent } from './history/history.component';
+import { UserComponent } from './user/user.component';
+import { ClientComponent } from './client/client.component';
 import { FacadeGuard } from './guards/facade.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BlockDetailComponent } from './block-detail/block-detail.component';
@@ -32,6 +34,12 @@ const routes: Route[] = [{
             }, {
                 path: 'history',
                 component: HistoryComponent
+            }, {
+                path: 'user',
+                component: UserComponent
+            }, {
+                path: 'client',
+                component: ClientComponent
             }
         ]
     }, {
