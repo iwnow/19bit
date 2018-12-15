@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
+import { WavesService } from '../services/waves.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   label: string;
   error = null;
 
+  readonly pluginLink = 'https://chrome.google.com/webstore/detail/waves-keeper/lpilbniiabackdjcionkobglmddfbcjo?hl=en-GB';
+
   get signUp() {
     return this.loginForm.get('signUp');
   }
@@ -28,8 +31,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private auth: AuthService,
     private router: Router,
     public snackBar: MatSnackBar,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    public readonly waves: WavesService,
+    public cdr: ChangeDetectorRef
+  ) {
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -44,34 +50,20 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.label = v ? 'SignIn' : 'SignUp';
       });
     this.auth.isAuth.subscribe(auth => {
-      auth && this.router.navigateByUrl('/');
+      auth && this.router.navigateByUrl('/').then(() => this.cdr.detectChanges());
     })
   }
 
   ngAfterViewInit() {
+    setTimeout(() => this.cdr.detectChanges(), 1000);
   }
 
   onLogin() {
-    // this.error = null;
-    // try {
-    //   if (!this.signUp.value && this.loginForm.controls.password.valid) {
-    //     const seed = await this.auth.signUp(this.loginForm.controls.password.value);
-    //     this.dialog.open(this.seedTmpl, {
-    //       data: seed,
-    //     })
-    //   } else if (this.signUp.value && this.loginForm.valid) {
-    //     await this.auth.signIn(
-    //       this.loginForm.controls.password.value,
-    //       this.loginForm.controls.privateKey.value
-    //     );
-    //   }
-    // } catch (e) {
-    //   this.error = e;
-    //   this.snackBar.open(`Error: ${e || 'seed is not valid '}`, 'OK', {
-    //     duration: 3000
-    //   });
-    // }
-    return this.auth.signIn();
+    this.auth.signIn().then(() => {
+      setTimeout(() => {
+        this.cdr.detectChanges();
+      });
+    });
   }
 
 }

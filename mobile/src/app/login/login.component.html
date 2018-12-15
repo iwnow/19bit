@@ -4,11 +4,11 @@
       <mat-card-header>
         <div mat-card-avatar
              class="login-header-image"></div>
-            
-          <mat-card-title>EncryptoTel Wallet 🚀</mat-card-title>
+
+          <mat-card-title>19BIT 🚀</mat-card-title>
         <mat-card-subtitle>Sign</mat-card-subtitle>
       </mat-card-header>
-      <form [formGroup]="loginForm"
+      <!-- <form [formGroup]="loginForm"
             (keyup.enter)="onLogin()"
             novalidate>
         <mat-form-field>
@@ -27,23 +27,30 @@
           </mat-form-field>
         <mat-slide-toggle formControlName="signUp">{{label}}
         </mat-slide-toggle>
-      </form>
+      </form> -->
       <mat-card-content>
-  
+        <ng-container *ngIf="waves.isAvailable else installKeeper">
+            <button  mat-raised-button
+            (click)="onLogin()"
+            color="primary">
+      <mat-icon>account_circle</mat-icon>
+      Sign in with Waves Keeper!
+    </button>
+        </ng-container>
+
+  <ng-template #installKeeper>
+      <p>
+        Please install browser chrome extension <a [href]="pluginLink" target="_blank">Waves Keeper</a>
+      </p>
+    </ng-template>
+
       </mat-card-content>
-  
-      <button mat-raised-button
-              (click)="onLogin()"
-              color="primary">
-        <!-- <mat-icon>account_circle</mat-icon> -->
-        GO!
-      </button>
     </mat-card>
-  
+
   </div>
 
   <ng-template #seedTmpl let-seed>
-    
+
     <h2 mat-dialog-title>Seed</h2>
     <mat-dialog-content>
       Your seed: {{seed}}

@@ -60,6 +60,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BlocksService } from './services/blocks.service';
 import { BlockDetailComponent } from './block-detail/block-detail.component';
 import { ApiService } from './services/api.service';
+import { WavesService } from './services/waves.service';
+import { AttachmentsComponent } from './attachments/attachments.component';
+import { MarketComponent } from './market/market.component';
 
 @NgModule({
   declarations: [
@@ -71,13 +74,15 @@ import { ApiService } from './services/api.service';
     HistoryComponent,
     ProfileComponent,
     DashboardComponent,
-    BlockDetailComponent
+    BlockDetailComponent,
+    AttachmentsComponent,
+    MarketComponent
   ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/unblock-t19/ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     LayoutModule,
     FlexLayoutModule,
     ReactiveFormsModule,
@@ -114,9 +119,8 @@ import { ApiService } from './services/api.service';
     MatToolbarModule,
     MatTooltipModule,
     MatFormFieldModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LoginGuard, AuthService, StorageService, FacadeGuard, BlocksService, ApiService],
+  providers: [LoginGuard, AuthService, StorageService, FacadeGuard, BlocksService, ApiService, WavesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

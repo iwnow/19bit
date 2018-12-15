@@ -1,7 +1,7 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <span class="appLogo" routerLink="/">Hack Core 🚀</span>
+    <span class="appLogo" routerLink="/">19BIT 🚀</span>
     <span fxFlex></span>
     <!-- <mat-card class="profile-card-toolbar">
       <mat-card-header >
@@ -12,6 +12,10 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item type="button" routerLink="/">
+            <mat-icon>account_circle</mat-icon>
+            <span>Info</span>
+          </button>
       <button mat-menu-item type="button" (click)="auth.logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Logout</span>
@@ -24,9 +28,11 @@
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <a mat-list-item routerLink="/wallet"> <mat-icon>account_balance_wallet</mat-icon>&nbsp; Wallet</a>
+        <!-- <a mat-list-item routerLink="/wallet"> <mat-icon>account_balance_wallet</mat-icon>&nbsp; Wallet</a>
         <a mat-list-item routerLink="/blocks"><mat-icon>dashboard</mat-icon>&nbsp;Blocks</a>
-        <a mat-list-item routerLink="/history"><mat-icon>history</mat-icon>&nbsp;History</a>
+        <a mat-list-item routerLink="/history"><mat-icon>history</mat-icon>&nbsp;History</a> -->
+        <a mat-list-item routerLink="/market"><mat-icon class="buti-color">dashboard</mat-icon>&nbsp;Market</a>
+        <a mat-list-item routerLink="/attachments"><mat-icon class="buti-color">attachment</mat-icon>&nbsp;My Files</a>
       </mat-nav-list>
     </mat-sidenav>
 

@@ -17,3 +17,22 @@ $candy-app-theme: mat-dark-theme($hack-primary, $hack-accent, $hack-warn);
 @include angular-material-theme($candy-app-theme);
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+a {
+  text-decoration: none;
+  color: lightseagreen;
+  font-weight: 500;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.buti {
+  box-sizing: border-box;
+  padding: 4px 8px;
+  background-color: cadetblue;
+}
+
+.buti-color {
+  color: cadetblue;
+}
