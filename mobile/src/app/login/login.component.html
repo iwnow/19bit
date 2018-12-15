@@ -38,6 +38,8 @@
     </button>
         </ng-container>
 
+        <div *ngIf="Boolean(error)">Error: {{error}}</div>
+
   <ng-template #installKeeper>
       <p>
         Please install browser chrome extension <a [href]="pluginLink" target="_blank">Waves Keeper</a>

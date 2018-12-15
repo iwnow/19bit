@@ -55,7 +55,7 @@ export class AuthService {
       this.setUserInfo(res)
       this._auth.next(true);
       this.router.navigateByUrl('/');
-    }).catch(console.error);
+    });
 
   }
 
