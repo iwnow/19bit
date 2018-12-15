@@ -59,6 +59,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BlocksService } from './services/blocks.service';
 import { BlockDetailComponent } from './block-detail/block-detail.component';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,7 @@ import { BlockDetailComponent } from './block-detail/block-detail.component';
     MatFormFieldModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LoginGuard, AuthService, StorageService, FacadeGuard, BlocksService],
+  providers: [LoginGuard, AuthService, StorageService, FacadeGuard, BlocksService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
