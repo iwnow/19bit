@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { tap } from 'rxjs/operators';
 
@@ -17,8 +17,9 @@ export class FacadeGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.auth.isAuth.pipe(
         tap(auth => {
-          if (!auth)
+          if (!auth) {
             this.router.navigateByUrl('/login');
+          }
           // else if (state.url === '/')
           //   this.router.navigateByUrl('/wallet');
         })

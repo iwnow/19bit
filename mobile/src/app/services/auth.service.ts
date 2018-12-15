@@ -1,43 +1,41 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { XkeyService } from './xkey.service';
+import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  protected currentKey$: BehaviorSubject<string>;
+  private _authKey = 'asdjfkhasdfnk';
+  private _auth = new BehaviorSubject<boolean>(this._storage.getKey(this._authKey));
 
   get isAuth() {
-    return this.currentKey$.pipe(
+    return this._auth.pipe(
       map(result => !!result)
     );
   }
 
   constructor(
-    protected xkeys: XkeyService,
-    protected router: Router
-  ) { 
-    this.currentKey$ = new BehaviorSubject(xkeys.getPublicKey());
+    protected router: Router,
+    private _storage: StorageService
+  ) {
   }
 
-  async signIn(secret, seed) {
-    await this.xkeys.createKeyPair(secret, seed);
-    this.currentKey$.next(this.xkeys.getPublicKey());
-    this.router.navigateByUrl('/');
+  signIn(secret?, seed?) {
+    this._storage.saveKey(this._authKey, true);
+    this._auth.next(true);
+    return this.router.navigateByUrl('/');
   }
 
-  async signUp(secret) {
-    const seed = await this.xkeys.createKeyPair(secret);
-    this.currentKey$.next(this.xkeys.getPublicKey());
-    this.router.navigateByUrl('/');
-    return seed;
+  signUp(secret?) {
+    this._storage.saveKey(this._authKey, true);
+    this._auth.next(true);
+    return this.router.navigateByUrl('/');
   }
 
   logout() {
-    this.xkeys.removeKeys();
-    this.currentKey$.next(null);
+    this._storage.saveKey(this._authKey, false);
+    this._auth.next(false);
     this.router.navigateByUrl('/login');
   }
 

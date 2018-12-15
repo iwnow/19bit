@@ -53,7 +53,6 @@ import { HistoryComponent } from './history/history.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
-import { XkeyService } from './services/xkey.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FacadeGuard } from './guards/facade.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -113,9 +112,10 @@ import { BlockDetailComponent } from './block-detail/block-detail.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LoginGuard, AuthService, StorageService, XkeyService, FacadeGuard, BlocksService],
+  providers: [LoginGuard, AuthService, StorageService, FacadeGuard, BlocksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

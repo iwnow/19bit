@@ -1,10 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
-import { XkeyService } from '../services/xkey.service';
 import { AuthService } from '../services/auth.service';
 
-import {core} from '../core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,11 +17,10 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
   private _mobileQueryListener: () => void;
 
   mobileQuery: MediaQueryList;
-  
+
   constructor(
     public cdr: ChangeDetectorRef,
     public media: MediaMatcher,
-    public xkey: XkeyService,
     public auth: AuthService
   ) { }
 
@@ -31,8 +28,6 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => this.cdr.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    window['__facade'] = this;
-    window['__core'] = core;
   }
 
   ngOnDestroy(): void {
@@ -43,7 +38,7 @@ export class FacadeComponent implements OnInit, OnDestroy, AfterViewInit {
     setTimeout(() => {
       if (!this.mobileQuery.matches)
         this.sideNav.open();
-      
+
     });
   }
 

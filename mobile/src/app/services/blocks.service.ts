@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {core} from '../core';
 
 export interface BlockModel {
   difficulty: number;
@@ -38,13 +37,11 @@ export class BlocksService {
   ) { }
 
   async getBlocks(n: number) {
-    const res = await core.getNTransactions(n);
-    return res.data as BlockModel[];
+    return [];
   }
 
   async getTransactions(blockId) {
-    const res = await core.getTransactionHistoryByBlockId(blockId);
-    return res.data as TxModel[];
+    return [];
   }
 
 }
