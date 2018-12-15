@@ -60,7 +60,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BlocksService } from './services/blocks.service';
 import { BlockDetailComponent } from './block-detail/block-detail.component';
 import { ApiService } from './services/api.service';
-import { MyNewComponentComponent } from './my-new-component/my-new-component.component';
 import { UserComponent } from './user/user.component';
 import { ClientComponent } from './client/client.component';
 import {NgModule} from '@angular/core';
@@ -78,7 +77,6 @@ import {MatInputModule, MatTableModule, MatToolbarModule } from '@angular/materi
     ProfileComponent,
     DashboardComponent,
     BlockDetailComponent,
-    MyNewComponentComponent,
     UserComponent,
     ClientComponent
   ],
