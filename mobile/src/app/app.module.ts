@@ -63,6 +63,8 @@ import { ApiService } from './services/api.service';
 import { WavesService } from './services/waves.service';
 import { AttachmentsComponent } from './attachments/attachments.component';
 import { MarketComponent } from './market/market.component';
+import { ClientComponent } from './client/client.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { MarketComponent } from './market/market.component';
     DashboardComponent,
     BlockDetailComponent,
     AttachmentsComponent,
-    MarketComponent
+    MarketComponent,
+    ClientComponent,
+    UserComponent
   ],
   imports: [
     BrowserAnimationsModule,

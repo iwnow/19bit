@@ -11,6 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BlockDetailComponent } from './block-detail/block-detail.component';
 import { MarketComponent } from './market/market.component';
 import { AttachmentsComponent } from './attachments/attachments.component';
+import { UserComponent } from './user/user.component';
+import { ClientComponent } from './client/client.component';
 
 const routes: Route[] = [{
         path: '',
@@ -40,7 +42,14 @@ const routes: Route[] = [{
           }, {
             path: 'attachments',
             component: AttachmentsComponent
-          }
+          },
+          {
+            path: 'user',
+            component: UserComponent
+        }, {
+            path: 'client',
+            component: ClientComponent
+        }
         ]
     }, {
         path: 'login',

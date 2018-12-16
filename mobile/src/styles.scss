@@ -16,12 +16,16 @@ $candy-app-theme: mat-dark-theme($hack-primary, $hack-accent, $hack-warn);
 
 @include angular-material-theme($candy-app-theme);
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 100;
+}
 
 a {
   text-decoration: none;
   color: lightseagreen;
-  font-weight: 500;
+  font-weight: 100;
 }
 a:hover {
   text-decoration: underline;
@@ -35,4 +39,8 @@ a:hover {
 
 .buti-color {
   color: cadetblue;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
 }
