@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable } from 'rxjs';
 
 export interface PeriodicElement {
   name: string;
@@ -31,15 +33,20 @@ export class UserComponent {
 	displayedColumns: string[] = ['name', 'weight', 'symbol', 'position'];
 	columnsToDisplay: string[] = this.displayedColumns.slice();
 	data: PeriodicElement[] = ELEMENT_DATA;
-	
+  
+  
+  
 	addColumn() {
+     
     const randomColumn = Math.floor(Math.random() * this.displayedColumns.length);
     this.columnsToDisplay.push(this.displayedColumns[randomColumn]);
   }
 
   removeColumn() {
     if (this.columnsToDisplay.length) {
-      this.columnsToDisplay.pop();
+       //this.columnsToDisplay.pop();
+
+       
     }
   }
 
@@ -56,6 +63,23 @@ export class UserComponent {
     }
   }
 
+  cellClicked(element) {
+    console.log(element.position);
+    const rows = [];
+    ELEMENT_DATA.forEach(element => rows.push(element, {detailRow: true, element }));
+
+    ELEMENT_DATA.forEach(element2 => {
+      if(element.position == element2.position) {
+        rows.pop();
+      }
+    });
+
+    rows.push();
+
+    console.log(rows);
+    //return Observable.of(rows);
+  }
+
   constructor() { }
 
 	fileToUpload: File = null;
@@ -64,8 +88,24 @@ export class UserComponent {
 	}	
 
   ngOnInit() {
-
+    
 	  console.log("asdasda")
 
   }
+}
+
+export class ExampleDataSource extends DataSource<any> {
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<Element[]> {
+    const rows = [];
+
+    
+
+    ELEMENT_DATA.forEach(element => rows.push(element, {detailRow: true, element }));
+
+    console.log(rows);
+    return Observable.apply(rows);
+  }
+
+  disconnect() { }
 }
