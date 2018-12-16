@@ -1,0 +1,31 @@
+# CONSTANT TYPES OPERATIONS
+let initShare = 0
+let confirmInitShare = 1
+let doShare = 2
+let confirmDoShare = 3
+
+let invalidOperationError = "invalid operation"
+
+let sender = tx.sender
+
+match (tx) {
+    case d: DataTransaction =>
+        let requestType = if (isDefined(d.data[0])) then extract(d.data[0].value) else throw("request type not found on data[0]")
+        let requestShareId = if (isDefined(d.data[1])) then extract(d.data[1].value) else throw("request shareId not found on data[1]")
+
+        currentStep = if (isDefined(getString(sender, requestShareId))) then getString(sender, requestShareId) else -1
+
+        match (requestType) {
+            case initShare => #для того кто иницировал это первая операция
+                if (currentStep == -1) then true else throw(invalidOperationError)
+            case confirmInitShare => #для того кто поджтверждает это первая операция
+                if (currentStep == -1) then true else throw(invalidOperationError)
+            case doShare => #для того кто раздает доступ это следующая операция после  cnfirm == 1
+                if (currentStep == 1) then true else throw(invalidOperationError)
+            case confirmDoShare => #для того кто подтверждает доступ это следующая операция после  initShare == 0
+                if (currentStep == 0) then true else throw(invalidOperationError)
+            case _ => throw("invalid request type")
+          }
+
+    case _ => throw("not implemented")
+  }
