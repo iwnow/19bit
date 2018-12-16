@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.cdr.detectChanges();
       });
     }).catch(err => {
-      this.error = String(err);
+      this.error = String(err.message || err);
       console.error(err);
       setTimeout(() => {
         this.cdr.detectChanges();
